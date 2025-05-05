@@ -1,21 +1,6 @@
 <?php
-    // start session (we want to use $_SESSION in this page)
-    session_start();
-
     // Connect to Database
-    // 1. database info
-    $host = "127.0.0.1";
-    $database_name ="todo-list-app"; // connecting to which database
-    $database_user = "root";
-    $database_password ="";
-    
-    // 2. connect PHP with the MySQL database
-    // PDO (PHP Database Object)
-    $database = new PDO(
-        "mysql:host=$host;dbname=$database_name", // host and db name
-        $database_user, // username
-        $database_password // password
-    );
+    $database = connectToDB();
 
     // 3. get the data from the login form
     $email = $_POST["email"];
@@ -44,8 +29,8 @@
                 // 7. store the user data in the session storage to login the user
                 $_SESSION["user"] = $user;
 
-                //8. redirect the user back to index.php
-                header("Location: index.php");
+                //8. redirect the user back to /
+                header("Location: /");
                 exit;
             } else {
                 echo "The password provided is incorrect";
